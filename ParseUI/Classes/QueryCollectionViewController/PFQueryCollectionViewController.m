@@ -255,7 +255,15 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
                 [_mutableObjects removeAllObjects];
             }
 
-            [_mutableObjects addObjectsFromArray:foundObjects];
+            for (id foundObject in foundObjects) {
+                NSInteger index = [_mutableObjects indexOfObject:foundObject];
+                if (index == NSNotFound) {
+                    [_mutableObjects addObject:foundObject];
+                } else {
+                    _mutableObjects[index] = foundObject;
+                }
+            }
+            
             [self.collectionView reloadData];
         }
 
@@ -326,7 +334,7 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
     _currentNextPageView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                               withReuseIdentifier:PFQueryCollectionViewNextPageReusableViewIdentifier
                                                                      forIndexPath:[self _indexPathForPaginationReusableView]];
-    _currentNextPageView.textLabel.text = NSLocalizedString(@"Load more...", @"Load more...");
+//    _currentNextPageView.textLabel.text = NSLocalizedString(@"Load more...", @"Load more...");
     [_currentNextPageView addTarget:self action:@selector(loadNextPage) forControlEvents:UIControlEventTouchUpInside];
     _currentNextPageView.animating = self.loading;
     return _currentNextPageView;
