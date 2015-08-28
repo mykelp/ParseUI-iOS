@@ -255,7 +255,15 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
                 [_mutableObjects removeAllObjects];
             }
 
-            [_mutableObjects addObjectsFromArray:foundObjects];
+            for (id foundObject in foundObjects) {
+                NSInteger index = [_mutableObjects indexOfObject:foundObject];
+                if (index == NSNotFound) {
+                    [_mutableObjects addObject:foundObject];
+                } else {
+                    _mutableObjects[index] = foundObject;
+                }
+            }
+            
             [self.collectionView reloadData];
         }
 
