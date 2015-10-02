@@ -223,10 +223,10 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
 #pragma mark Loading Data
 
 - (BFTask *)loadObjects {
-    return [self loadObjects:0 clear:YES];
+    return [self loadObjects:0 clear:YES insert:NO];
 }
 
-- (BFTask *)loadObjects:(NSInteger)page clear:(BOOL)clear {
+- (BFTask *)loadObjects:(NSInteger)page clear:(BOOL)clear insert:(BOOL)insert {
     self.loading = YES;
     [self objectsWillLoad];
 
@@ -258,7 +258,11 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
             for (id foundObject in foundObjects) {
                 NSInteger index = [_mutableObjects indexOfObject:foundObject];
                 if (index == NSNotFound) {
-                    [_mutableObjects addObject:foundObject];
+                    if (insert) {
+                        [_mutableObjects insertObject:foundObject atIndex:0];
+                    } else {
+                        [_mutableObjects addObject:foundObject];
+                    }
                 } else {
                     _mutableObjects[index] = foundObject;
                 }

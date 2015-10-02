@@ -170,7 +170,7 @@ PFUI_ASSUME_NONNULL_BEGIN
 
  @returns An awaitable task that completes when the reload succeeds
  */
-- (BFTask *)loadObjects:(NSInteger)page clear:(BOOL)clear;
+- (BFTask *)loadObjects:(NSInteger)page clear:(BOOL)clear insert:(BOOL)insert;
 
 /*!
  @abstract Loads the next page of objects, appends to table, and refreshes.
