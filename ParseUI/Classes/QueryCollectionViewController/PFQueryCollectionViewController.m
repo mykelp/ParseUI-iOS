@@ -282,7 +282,7 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
 
 - (void)loadNextPage {
     if (!self.loading) {
-        [self loadObjects:(_currentPage + 1) clear:NO];
+        [self loadObjects:(_currentPage + 1) clear:NO insert:NO];
         _currentNextPageView.animating = YES;
     }
 }
