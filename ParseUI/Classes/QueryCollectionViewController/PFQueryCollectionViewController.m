@@ -282,10 +282,12 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // enable infinite scrolling
-    if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
-        if (![self isLoading] && [self _shouldLoadNextPage]) {
-            [self loadNextPage];
+    if (self.infiniteScrollEnabled) {
+        // enable infinite scrolling
+        if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
+            if (![self isLoading] && [self _shouldLoadNextPage]) {
+                [self loadNextPage];
+            }
         }
     }
 }
