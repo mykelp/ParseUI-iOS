@@ -68,6 +68,11 @@ PFUI_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) IBInspectable BOOL paginationEnabled;
 
 /*!
+ @abstract Whether the collection should use the built-in infiniteScroll feature. Default - `NO`.
+ */
+@property (nonatomic, assign) IBInspectable BOOL infiniteScrollEnabled;
+
+/*!
  @abstract The number of objects to show per page. Default - `25`.
  */
 @property (nonatomic, assign) IBInspectable NSUInteger objectsPerPage;
